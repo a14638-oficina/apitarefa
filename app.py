@@ -42,21 +42,21 @@ api.add_resource(TarefaId, "/tarefas/<int:id>")        # GET | PUT | DELETE
 
 
 if __name__ == "__main__":
-bd.init_app(app)
+    bd.init_app(app)
 
-with app.app_context():
-    bd.create_all() #Cria todas as tabelas definidas no modelo do SQLAlchemy
+    with app.app_context():
+        bd.create_all()  # Cria todas as tabelas dos modelos SQLAlchemy
 
-    if not Utilizador.query.filter_by(
-        email="admin@empresa.pt"
-    ).first():
-        admin = Utilizador(
-            username="admin",
-            email="admin@empresa.pt",
-            password=os.environ.get("ADMIN_PASSWORD", "admin123"),
-            tipo="admin",
-        )
+        if not Utilizador.query.filter_by(
+            email="admin@oficina.pt"
+        ).first():
+            admin = Utilizador(
+                username="admin",
+                email="admin@oficina.pt",
+                password=os.environ.get("ADMIN_PASSWORD", "admin123"),
+                tipo="admin",
+            )
 
-        admin.save_user()
+            admin.save_user()
 
     app.run(debug=True)
